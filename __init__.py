@@ -109,7 +109,6 @@ class Mesh_OT_ExtrudeBlock(bpy.types.Operator):
 				bmesh.ops.split_edges(bm, edges = i.edges)
 				verts = i.verts
 				face = [i]
-
 				i.normal_flip()
 				calculate_normals = True
 
