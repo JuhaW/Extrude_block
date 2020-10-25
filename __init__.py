@@ -89,7 +89,7 @@ class Mesh_OT_ExtrudeBlock(bpy.types.Operator):
 		bm = bmesh.from_edit_mesh(o.data)
 
 		faces = [i for i in bm.faces if i.select]
-
+		
 		for i in faces:
 			
 			i.select_set(False)
@@ -106,11 +106,12 @@ class Mesh_OT_ExtrudeBlock(bpy.types.Operator):
 				face =  [j for j in geom['geom'] if isinstance(j, bmesh.types.BMFace)]
 				calculate_normals = False
 			else:
+				bmesh.ops.split_edges(bm, edges = i.edges)
 				verts = i.verts
 				face = [i]
+				
 				i.normal_flip()
 				calculate_normals = True
-				#bm.normal_update() # not sure if req'd
 
 			n = i.normal
 			norm = n * self.offset
@@ -127,7 +128,6 @@ class Mesh_OT_ExtrudeBlock(bpy.types.Operator):
 			if calculate_normals:
 				face.append(i)
 				bmesh.ops.recalc_face_normals(bm , faces = face )
-
 
 		bmesh.update_edit_mesh(o.data )
 
