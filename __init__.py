@@ -99,7 +99,7 @@ class Mesh_OT_ExtrudeBlock(bpy.types.Operator):
 			length = (length * self.percentage) / 100
 			#additional absolute length
 			length += self.length
-			
+
 			if duplicate_face:
 				geom = bmesh.ops.duplicate(bm, geom = [i])
 				verts = [j for j in geom['geom'] if isinstance(j, bmesh.types.BMVert)]
@@ -132,7 +132,6 @@ class Mesh_OT_ExtrudeBlock(bpy.types.Operator):
 
 
 		return {'FINISHED'}
-
 
 
 addon_keymaps = []
